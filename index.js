@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.post("/",async (req,res)=>{
     const {day,month,year} = req.body;
     const daysSinceThen=moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`,"YYYY-MM-DD"))).days();
-    res.send(daysSinceThen);
+    res.text(daysSinceThen);
 });
 
 const PORT=process.env.PORT || 3000;
