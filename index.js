@@ -17,7 +17,8 @@ app.post("/",async (req,res)=>{
     const daysSinceThen=Math.floor(moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`,"YYYY-MM-DD"))).asDays());
     console.log(daysSinceThen);
     const doShift=daysSinceThen>0;
-    const jsonForThatTime=await request(`https://bing.com/HPImageArchive.aspx?format=js&idx=${doShift?daysSinceThen-1:daysSinceThen}&n=${doShift?2:1}&mkt=${locale}`,{json:true});
+    const jsonForThatTime=await request({uri:`https://bing.com/HPImageArchive.aspx?format=js&idx=${doShift?daysSinceThen-1:daysSinceThen}&n=${doShift?2:1}&mkt=${locale}`,json:true});
+    console.log(jsonForThatTime);
     res.send(jsonForThatTime.pop().url);
 });
 
