@@ -18,8 +18,7 @@ app.post("/",async (req,res)=>{
     console.log(daysSinceThen);
     const doShift=daysSinceThen>0;
     const jsonForThatTime=await request({uri:`https://bing.com/HPImageArchive.aspx?format=js&idx=${doShift?daysSinceThen-1:daysSinceThen}&n=${doShift?2:1}&mkt=${locale}`,json:true});
-    console.log(jsonForThatTime);
-    res.send(jsonForThatTime.pop().url);
+    res.send(jsonForThatTime.images.pop().url);
 });
 
 const PORT=process.env.PORT || 3000;
