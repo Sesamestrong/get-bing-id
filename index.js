@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.post("/",async (req,res)=>{
     const {day,month,year} = req.body;
     console.log(day,month,year);
-    const daysSinceThen=moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`,"YYYY-MM-DD"))).days();
+    const daysSinceThen=moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`,"YYYY-MM-DD"))).asDays();
     console.log(daysSinceThen);
     res.send(`${daysSinceThen}`);
 });
