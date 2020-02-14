@@ -13,7 +13,9 @@ app.use(bodyParser.urlencoded({
 //TODO Really, the requesting and stuff should be done via json-scraper
 app.post("/",async (req,res)=>{
     const {day,month,year,locale} = req.body;
-    const daysSinceThen=moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`))).days();
+    console.log(day,month,year);
+    const daysSinceThen=Math.floor(moment.duration(moment().startOf("day").diff(moment(`${year}-${month}-${day}`,"YYYY-MM-DD"))).asDays());
+    console.log(daysSinceThen);
     const doShift=daysSinceThen>0;
     const jsonForThatTime=await request(`https://bing.com/HPImageArchive.aspx?format=js&idx=${doShift?daysSinceThen-1:daysSinceThen}&n=${doShift?2:1}&mkt=${locale}`,{json:true});
     res.send(jsonForThatTime.pop().url);
